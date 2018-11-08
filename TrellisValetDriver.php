@@ -12,10 +12,10 @@ class TrellisValetDriver extends ValetDriver
      */
     public function serves($sitePath, $siteName, $uri)
     {
-        return file_exists($sitePath . '/site/web/app/mu-plugins/bedrock-autoloader.php') ||
-              (is_dir($sitePath . '/site/web/app/') &&
-               file_exists($sitePath . '/site/web/wp-config.php') &&
-               file_exists($sitePath . '/site/config/application.php'));
+        return file_exists($sitePath . '/bedrock/web/app/mu-plugins/bedrock-autoloader.php') ||
+              (is_dir($sitePath . '/bedrock/web/app/') &&
+               file_exists($sitePath . '/bedrock/web/wp-config.php') &&
+               file_exists($sitePath . '/bedrock/config/application.php'));
     }
 
     /**
@@ -28,7 +28,7 @@ class TrellisValetDriver extends ValetDriver
      */
     public function isStaticFile($sitePath, $siteName, $uri)
     {
-        $staticFilePath = $sitePath . '/site/web' . $uri;
+        $staticFilePath = $sitePath . '/bedrock/web' . $uri;
         if ($this->isActualFile($staticFilePath)) {
             return $staticFilePath;
         }
@@ -47,11 +47,11 @@ class TrellisValetDriver extends ValetDriver
     {
         $_SERVER['PHP_SELF'] = $uri;
         if (strpos($uri, '/wp/') === 0) {
-            return is_dir($sitePath . '/site/web' . $uri)
-                            ? $sitePath . '/site/web' . $this->forceTrailingSlash($uri) . '/index.php'
-                            : $sitePath . '/site/web' . $uri;
+            return is_dir($sitePath . '/bedrock/web' . $uri)
+                            ? $sitePath . '/bedrock/web' . $this->forceTrailingSlash($uri) . '/index.php'
+                            : $sitePath . '/bedrock/web' . $uri;
         }
-        return $sitePath . '/site/web/index.php';
+        return $sitePath . '/bedrock/web/index.php';
     }
 
     /**
